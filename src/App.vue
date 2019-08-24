@@ -1,15 +1,24 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-  </div>
+  <ul>
+    <li v-for="(user) in users" :key="user.age">
+      {{user.age}}--{{user.name}}
+    </li>
+  </ul>
 </template>
 
 <script>
 import axios from 'axios'
 export default {
   name: "app",
+  mounted() {
+    axios.get('/api/users').then((res)=>{
+      this.users = res.data;
+    })
+  },
   data() {
-    return {};
+    return {
+      users: []
+    };
   }
 };
 </script>
